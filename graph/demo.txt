@@ -1,0 +1,114 @@
+CareerGraph Demo Queries
+=========================
+
+1. Start the app
+
+From PowerShell:
+
+  cd D:\CareerGraph\graph
+  npm start
+
+Open in a browser:
+
+  http://localhost:3000
+
+
+2. Chat messages to enter in the app
+
+Use these one at a time:
+
+  I want to become a Cloud Engineer.
+
+  I know Python and Git.
+
+  I am learning AWS and Docker.
+
+  I prefer project-based learning.
+
+  I recently built a FastAPI application.
+
+  I did JavaScript.
+
+  I want to know which skills I should learn next.
+
+Expected memory behavior:
+
+  Goal: Cloud Engineer
+  Known skills: Python, Git, JavaScript
+  Learning skills: AWS, Docker
+  Preference: Project-Based Learning
+  Project: FastAPI application
+
+
+3. Health check
+
+Browser:
+
+  http://localhost:3000/health
+
+PowerShell:
+
+  Invoke-WebRequest http://localhost:3000/health
+
+
+4. Seed the demo graph
+
+Browser:
+
+  http://localhost:3000/api/seed
+
+PowerShell:
+
+  Invoke-WebRequest http://localhost:3000/api/seed
+
+
+5. View stored context
+
+  http://localhost:3000/api/context
+
+
+6. View graph data returned by the app
+
+  http://localhost:3000/api/graph
+
+
+7. Neo4j Aura queries
+
+Run these in the Neo4j Aura Query page.
+
+Show the complete graph:
+
+  MATCH (n)-[r]->(m)
+  RETURN n, r, m
+
+Show the demo user's memory:
+
+  MATCH (u:User {id: 'demo-user'})-[r]->(n)
+  RETURN u, r, n
+
+Show the user's career goal:
+
+  MATCH (u:User {id: 'demo-user'})-[:HAS_GOAL]->(c:Career)
+  RETURN u, c
+
+Show known and learning skills:
+
+  MATCH (u:User {id: 'demo-user'})-[r:KNOWS|LEARNING]->(s:Skill)
+  RETURN u, r, s
+
+Show projects and project skills:
+
+  MATCH (u:User {id: 'demo-user'})-[:WORKED_ON]->(p:Project)
+  OPTIONAL MATCH (p)-[:USES]->(s:Skill)
+  RETURN u, p, s
+
+Show preferences and decisions:
+
+  MATCH (u:User {id: 'demo-user'})-[r:PREFERS|MADE_DECISION]->(n)
+  RETURN u, r, n
+
+Find the Cloud Engineer skill gaps:
+
+  MATCH (u:User {id: 'demo-user'})-[:HAS_GOAL]->(c:Career)-[:REQUIRES]->(s:Skill)
+  WHERE NOT (u)-[:KNOWS|LEARNING]->(s)
+  RETURN c, s

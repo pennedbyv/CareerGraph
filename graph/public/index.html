@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CareerGraph</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.28.1/cytoscape.min.js"></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="panel panel-left">
+        <div class="panel-header">
+          <h2>My Journey</h2>
+        </div>
+        <div id="journeySummary" class="summary-card empty-state">
+          Loading your memory...
+        </div>
+      </aside>
+
+      <main class="panel panel-center">
+        <div class="panel-header">
+          <h2>CareerAgent</h2>
+        </div>
+
+        <div id="chatMessages" class="chat-messages" aria-live="polite">
+          <div class="message bot">
+            <div class="bubble">
+              I’m ready to help you plan your next career move. Tell me what you’re learning or what role you want to target.
+            </div>
+          </div>
+        </div>
+
+        <div class="composer">
+          <textarea id="chatInput" rows="3" placeholder="Example: I want to become a Cloud Engineer. I know Python and I’m learning AWS. I prefer project-based learning."></textarea>
+          <button id="sendButton">Send</button>
+        </div>
+      </main>
+
+      <aside class="panel panel-right">
+        <div class="panel-header">
+          <h2>Memory Graph</h2>
+        </div>
+        <div id="graphContainer" class="graph-container"></div>
+      </aside>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
