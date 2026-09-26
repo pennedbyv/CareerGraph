@@ -1,1 +1,1 @@
-Link : https://careergraph-navy.vercel.app/
+Live demo : https://careergraph-navy.vercel.app/
